@@ -341,14 +341,14 @@ function beforeCloseAttributeDialog() {
 function saveDefaultAttributes(databaseType, tenantType){
     addSiteAttribute = [];
     if (databaseType.toLowerCase() !== "mysql"){
-        var schemaDefaultAttribute = {
-            Name: window.Server.App.LocalizationContent.DefaultSchemaName,
+        var tenantSchemaDefaultAttribute = {
+            Name: tenantType.toLowerCase() === "boldreportsonpremise" ? window.Server.App.LocalizationContent.DefaultReportsSchemaName : window.Server.App.LocalizationContent.DefaultBISchemaName,
             Value: $("#schema-name").val().trim() || (databaseType.toLowerCase() === "postgresql" ? window.Server.App.LocalizationContent.DefaultSchemaForPostgres : window.Server.App.LocalizationContent.DefaultSchemaForMSSQL),
             CreatedDate: new Date(),
             ModifiedDate: new Date(),
             CustomAttributeId: customAttributeId
         }
-        addSiteAttribute.push(schemaDefaultAttribute);
+        addSiteAttribute.push(tenantSchemaDefaultAttribute);
     }
     var serverDefaultAttribute = {
         Name: tenantType.toLowerCase() === "boldreportsonpremise" ? window.Server.App.LocalizationContent.DefaultReportsPrefixName : window.Server.App.LocalizationContent.DefaultBIPrefixName,
@@ -357,6 +357,18 @@ function saveDefaultAttributes(databaseType, tenantType){
         ModifiedDate: new Date(),
         CustomAttributeId: customAttributeId
     }
+    addSiteAttribute.push(serverDefaultAttribute);
+    if (tenantSchema !== "" || databaseType.toLowerCase() !== "mysql"){
+        var schemaValue = tenantSchema !== "" ? tenantSchema : $("#schema-name").val().trim() || (databaseType.toLowerCase() === "postgresql" ? window.Server.App.LocalizationContent.DefaultSchemaForPostgres : window.Server.App.LocalizationContent.DefaultSchemaForMSSQL);
+        var umsSchemaDefaultAttribute = {
+            Name: window.Server.App.LocalizationContent.DefaultUMSSchemaName,
+            Value: schemaValue,
+            CreatedDate: new Date(),
+            ModifiedDate: new Date(),
+            CustomAttributeId: customAttributeId
+        }
+        addSiteAttribute.push(umsSchemaDefaultAttribute);
+    }
     var tenantDefaultAttribute = {
         Name: window.Server.App.LocalizationContent.DefaultUMSPrefixName,
         Value: $("#txt-ums-prefix").val().trim() || window.Server.App.LocalizationContent.DefaultPrefixForUMS,
@@ -364,7 +376,6 @@ function saveDefaultAttributes(databaseType, tenantType){
         ModifiedDate: new Date(),
         CustomAttributeId: customAttributeId
     }
-    addSiteAttribute.push(serverDefaultAttribute);
     addSiteAttribute.push(tenantDefaultAttribute);
 }
 
