@@ -1068,6 +1068,16 @@
             <param name="answer">The raw response text from the AI.</param>
             <returns>A string representing the corrected chart properties in key-value format.</returns>
         </member>
+        <member name="M:BoldBi.Ai.Base.CoreProcesses.ChartUpdationProcess.ProcessFuzzyMatching(System.String)">
+            <summary>
+            Performs fuzzy matching to find the best matching property name from a predefined list of property names.
+            </summary>
+            <param name="key">The key to match against the property names.</param>
+            <returns>
+            Returns the best matching property name if a match is found with a similarity score greater than or equal to 80.
+            If no match is found, the original key is returned.
+            </returns>
+        </member>
         <member name="M:BoldBi.Ai.Base.CoreProcesses.ChartUpdationProcess.PrepareVisualizationPrompt">
             <summary>
             Prepares the visualization prompt for chart updation operations.
@@ -5271,6 +5281,66 @@
             Gets or sets the greetings message.
             </summary>
         </member>
+        <member name="T:BoldBi.Ai.Base.Models.AIResponseBuilder.ColorCustomization">
+            <summary>
+            Represents the color customization settings.
+            </summary>
+        </member>
+        <member name="P:BoldBi.Ai.Base.Models.AIResponseBuilder.ColorCustomization.Rule">
+            <summary>
+            Gets or sets the rules for color customization.
+            </summary>
+        </member>
+        <member name="P:BoldBi.Ai.Base.Models.AIResponseBuilder.ColorCustomization.Individual">
+            <summary>
+            Gets or sets the individual color customizations.
+            </summary>
+        </member>
+        <member name="T:BoldBi.Ai.Base.Models.AIResponseBuilder.Rule">
+            <summary>
+            Represents a rule for color customization.
+            </summary>
+        </member>
+        <member name="P:BoldBi.Ai.Base.Models.AIResponseBuilder.Rule.Column">
+            <summary>
+            Gets or sets the column name for the rule.
+            </summary>
+        </member>
+        <member name="P:BoldBi.Ai.Base.Models.AIResponseBuilder.Rule.Type">
+            <summary>
+            Gets or sets the type of comparison for the rule.
+            </summary>
+        </member>
+        <member name="P:BoldBi.Ai.Base.Models.AIResponseBuilder.Rule.Value">
+            <summary>
+            Gets or sets the values for the rule.
+            </summary>
+        </member>
+        <member name="P:BoldBi.Ai.Base.Models.AIResponseBuilder.Rule.Color">
+            <summary>
+            Gets or sets the color associated with the rule.
+            </summary>
+        </member>
+        <member name="T:BoldBi.Ai.Base.Models.AIResponseBuilder.Individual">
+            <summary>
+            Represents an individual color customization entry.
+            </summary>
+        </member>
+        <member name="P:BoldBi.Ai.Base.Models.AIResponseBuilder.Individual.Column">
+            <summary>
+            Gets or sets the column name for the individual entry.
+            </summary>
+        </member>
+        <member name="P:BoldBi.Ai.Base.Models.AIResponseBuilder.Individual.Value">
+            <summary>
+            Gets or sets the value for the individual entry.
+            </summary>
+        </member>
+        <member name="P:BoldBi.Ai.Base.Models.AIResponseBuilder.Individual.Color">
+            <summary>
+            Gets or sets the color associated with the individual entry.
+            </summary>
+        </member>
         <member name="T:BoldBi.Ai.Base.Models.AIResponseBuilder.CreateWidgetResponse">
             <summary>
             Represents the response for creating a widget in the chat interface.
@@ -5566,6 +5636,11 @@
         <member name="P:BoldBi.Ai.Base.Models.AIResponseBuilder.UpdateWidgetResponse.WidgetName">
             <summary>
             Gets or sets the name of the widget that was updated.
+            </summary>
+        </member>
+        <member name="P:BoldBi.Ai.Base.Models.AIResponseBuilder.UpdateWidgetResponse.ColorCustomization">
+            <summary>
+            Gets or sets the color customization.
             </summary>
         </member>
         <member name="T:BoldBi.Ai.Base.Models.AIResponseBuilder.UsageTokens">

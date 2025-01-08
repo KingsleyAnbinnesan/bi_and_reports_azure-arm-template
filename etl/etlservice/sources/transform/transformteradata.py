@@ -103,7 +103,7 @@ try:
                 cur.executemany(insert_query, data_to_insert)
                 print(f"Table moved to the destination, {teradata_table_name}")
             except Exception as e:
-                print(f"Error while inserting the data, {{e}}")
+                print(f"Error while inserting the data", str(e)
 except teradatasql.DatabaseError as db_err:
     # Handle any errors that occur during the database connection
     print("Error while connecting to the Teradata database:", db_err)

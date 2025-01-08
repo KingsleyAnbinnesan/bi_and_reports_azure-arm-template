@@ -13,7 +13,7 @@ try:
     cursor.execute("Select version();")
     print("Connection successful")
 except Exception as e:
-    print(f"Connection failed: {{e}}")
+    print(f"Connection failed:", str(e))
 
 finally:
     cursor.close()

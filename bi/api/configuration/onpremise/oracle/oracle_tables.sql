@@ -1261,11 +1261,6 @@ INSERT INTO BOLDBI_UserType (Type) VALUES ('Active Directory User')
 INSERT INTO BOLDBI_UserType (Type) VALUES ('Federation User')
 ;
 
-ALTER TABLE BOLDBI_MultiTabDashboard ADD CONSTRAINT FK_ParentDashboard FOREIGN KEY(ParentDashboardId) REFERENCES BOLDBI_Item (Id)
-;
-ALTER TABLE BOLDBI_MultiTabDashboard ADD CONSTRAINT FK_ChildDashboard FOREIGN KEY(ChildDashboardId) REFERENCES BOLDBI_Item (Id)
-;
-
 INSERT INTO BOLDBI_ConditionCategory (Name, IsActive) VALUES ('Increases', 1)
 ;
 INSERT INTO BOLDBI_ConditionCategory (Name, IsActive) VALUES ('Continuously Increases', 1)
@@ -1986,6 +1981,12 @@ INSERT INTO BOLDBI_PublishType (Name,IsActive) VALUES ('Unlock',1)
 ;
 
 ---- PASTE ALTER Queries below this section --------
+
+ALTER TABLE BOLDBI_MultiTabDashboard ADD CONSTRAINT FK_ParentDashboard FOREIGN KEY(ParentDashboardId) REFERENCES BOLDBI_Item (Id)
+;
+
+ALTER TABLE BOLDBI_MultiTabDashboard ADD CONSTRAINT FK_ChildDashboard FOREIGN KEY(ChildDashboardId) REFERENCES BOLDBI_Item (Id)
+;
 
 ALTER TABLE BOLDBI_PublishJobs ADD CONSTRAINT FK_PublishJobs_Type FOREIGN KEY (Type) REFERENCES BOLDBI_PublishType(Id)
 ;

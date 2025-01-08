@@ -1,4 +1,3 @@
-
 import os
 db2clientlib
 import ibm_db

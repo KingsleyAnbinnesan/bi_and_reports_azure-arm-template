@@ -340,7 +340,7 @@ function beforeCloseAttributeDialog() {
 
 function saveDefaultAttributes(databaseType, tenantType){
     addSiteAttribute = [];
-    if (databaseType.toLowerCase() !== "mysql"){
+    if (databaseType.toLowerCase() !== "mysql" && databaseType.toLowerCase() !== "oracle"){
         var tenantSchemaDefaultAttribute = {
             Name: tenantType.toLowerCase() === "boldreportsonpremise" ? window.Server.App.LocalizationContent.DefaultReportsSchemaName : window.Server.App.LocalizationContent.DefaultBISchemaName,
             Value: $("#schema-name").val().trim() || (databaseType.toLowerCase() === "postgresql" ? window.Server.App.LocalizationContent.DefaultSchemaForPostgres : window.Server.App.LocalizationContent.DefaultSchemaForMSSQL),
@@ -358,7 +358,7 @@ function saveDefaultAttributes(databaseType, tenantType){
         CustomAttributeId: customAttributeId
     }
     addSiteAttribute.push(serverDefaultAttribute);
-    if (tenantSchema !== "" || databaseType.toLowerCase() !== "mysql"){
+    if (tenantSchema !== "" || databaseType.toLowerCase() !== "mysql" && databaseType.toLowerCase() !== "oracle"){
         var schemaValue = tenantSchema !== "" ? tenantSchema : $("#schema-name").val().trim() || (databaseType.toLowerCase() === "postgresql" ? window.Server.App.LocalizationContent.DefaultSchemaForPostgres : window.Server.App.LocalizationContent.DefaultSchemaForMSSQL);
         var umsSchemaDefaultAttribute = {
             Name: window.Server.App.LocalizationContent.DefaultUMSSchemaName,
