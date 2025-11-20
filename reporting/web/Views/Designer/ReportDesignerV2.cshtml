@@ -60,10 +60,22 @@
     var customFontFolderPath = ViewBag.CustomFontFolder;
     var isUseFontsFromDirectory = ViewBag.IsUseFontsFromDirectory;
     var isHideGuidInUrl = ViewBag.IsHideGuidInUrl;
+    var isSandbox = ServerAppConfig.Sandbox.Reports.Enabled;
+    var GoogleTagManagerHeadScript = ServerAppConfig.GoogleTagManagerHeadScript;
+    var GoogleTagManagerBodyScript = ServerAppConfig.GoogleTagManagerBodyScript;
 }
 
 <html lang="en" style="height:100%;width:100%">
 <head>
+    
+    @{
+        #pragma warning disable SCS0029 // Google tag manager script
+        if (!string.IsNullOrWhiteSpace(GoogleTagManagerHeadScript))
+        {
+            @Html.Raw(GoogleTagManagerHeadScript)
+        }
+        #pragma warning restore SCS0029 // Google tab manager script
+    }
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width" />
     @if (ViewBag.reportName != null)
@@ -535,6 +547,7 @@
                 serviceUrl: "@reportServiceUrl",
                 filterDataConnectors: filterDataTiles,
                 ajaxBeforeLoad: ajaxBeforeSend,
+                previewReport: previewReport,
                 encryptData: encryptData,
                 decryptData: decryptData,
                 reportServerUrl: "@reportServerApiUrl",
@@ -578,6 +591,10 @@
             };
 
             var designer = new boldReportDesigner($('#' + controlId), designerModel);
+        }
+
+        function previewReport(args){
+            args.reportViewer.model.reportPath = "/" + args.model.reportPath;
         }
 
         function loadCustomFonts() {
@@ -724,7 +741,8 @@
                     'isPublic': isPublic,
                     'isDraft': isDraft === 'true',
                     'isEdit': isEditReport,
-                    'tags': selectedTags
+                    'tags': selectedTags,
+                    'isCreate': args.actionType === 'createServerReport' ? true : false
                 };
 
                 args.data = reportServerData;
@@ -1251,6 +1269,14 @@
     </script>
 </head>
 <body style="overflow: hidden; position: static; margin: 0; padding: 0; height: 100%; width: 100%">
+    @{
+        #pragma warning disable SCS0029 // Google tag manager script
+        if (!string.IsNullOrWhiteSpace(GoogleTagManagerBodyScript))
+        {
+            @Html.Raw(GoogleTagManagerBodyScript)
+        }
+        #pragma warning restore SCS0029 // Google tab manager script
+    }
     <div id="container"></div>
     <div id="toast-message-container" class="e-designer-toast-message"></div>
     @*@if (showTour)
